@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "elin-massagi"
+  },
+  "targets": {
+    "elin-massagi": {
+      "hosting": {
+        "elin-massagi": [
+          "elin-massagi"
+        ]
+      }
+    }
+  }
+}

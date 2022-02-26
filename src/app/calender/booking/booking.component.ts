@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BookingForm, BookingService } from 'src/app/services/booking.service';
 
 @Component({
   selector: 'app-booking',
@@ -8,6 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class BookingComponent implements OnInit {
   form: FormGroup;
+  currentDay = new Date();
 
   kroppsdelar: any = [
     "Fötter",
@@ -23,10 +25,11 @@ export class BookingComponent implements OnInit {
     "Händer"
   ]
 
-  constructor() { }
+  constructor(private bookingService: BookingService) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.currentDay.getDate();
   }
 
   initForm() {
@@ -42,7 +45,27 @@ export class BookingComponent implements OnInit {
 
   onSend() {
     if (this.form.valid) {
-      console.log(this.form.value)
+      let startDate = this.form.get("datum").value;
+      let endDate = this.form.get("datum").value;
+
+      let startTime = this.form.get("fran").value;
+      let startTimeHour = startTime.split(":")[0];
+      let startTimeMinute = startTime.split(":")[1];
+
+      let endTime = this.form.get("till").value;
+      let endTimeHour = endTime.split(":")[0];
+      let endTimeMinute = endTime.split(":")[1];
+
+      let start = new Date(startDate);
+      start.setHours(startTimeHour);
+      start.setMinutes(startTimeMinute);
+
+      let end = new Date(endDate);
+      end.setHours(endTimeHour);
+      end.setMinutes(endTimeMinute);
+
+      let title = this.form.get("fornamn").value;
+      this.bookingService.addBooking({title: title, start: start, end: end});
     } else {
       this.form.reset();
     }
