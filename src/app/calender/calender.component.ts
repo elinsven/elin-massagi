@@ -22,21 +22,37 @@ export class CalenderComponent implements OnInit {
 
     this.calendarOptions = {
       initialView: 'timeGridWeek',
+      locale: "sv",
       nowIndicator: true,
+      height: 700,
+      contentHeight: 700,
       allDaySlot: false,
       slotMinTime: '17:00',
+      slotLabelFormat: {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: false
+      },
       firstDay: 1,
-      height: 400,
+      expandRows: true,
       customButtons: {
         bookingButton: {
           text: 'Boka massage',
           click: () => this.openDialog()
         }
       },
+      buttonText: {
+        today:    'Idag',
+      },
       headerToolbar: {
         right: 'bookingButton today prev,next'
       },
-      events: []
+      events: [],
+      eventTimeFormat: {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: false
+      }
     };
   }
 
@@ -45,7 +61,7 @@ export class CalenderComponent implements OnInit {
       this.calendarOptions.events = res.map(evt => {
         let start = new Date(evt.start.seconds * 1000).toISOString();
         let end = new Date(evt.end.seconds * 1000).toISOString();
-        return {title: evt.title, start: start, end: end};
+        return {title: evt.name, start: start, end: end};
       })
     })
   } 

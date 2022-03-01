@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 
 export interface BookingForm {
   id?: string,
-  title: string,
+  name: string,
   start: any,
   end: any,
+  kroppsdel?: string[]
 }
 
 @Injectable({
@@ -38,7 +39,7 @@ export class BookingService {
 
   updateBooking(booking: BookingForm) {
     const bookingDocRef = doc(this.fireStore, `bookings/${booking.id}`);
-    return updateDoc(bookingDocRef, {title: booking.title, start: booking.start, end: booking.end});
+    return updateDoc(bookingDocRef, {name: booking.name, start: booking.start, end: booking.end, kroppsdel: booking?.kroppsdel});
   }
 
 }

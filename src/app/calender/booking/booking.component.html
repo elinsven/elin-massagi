@@ -3,23 +3,17 @@
     <mat-dialog-content class="mat-typography">
             <div class="row">
                 <mat-form-field>
-                    <mat-label>Förnamn</mat-label>
-                    <input matInput formControlName="fornamn" required>
-                    <mat-error *ngIf="form.controls['fornamn'].hasError('required')">Fältet är obligatoriskt</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Efternamn</mat-label>
-                    <input matInput formControlName="efternamn" required>
-                    <mat-error *ngIf="form.controls['efternamn'].hasError('required')">Fältet är obligatoriskt</mat-error>
+                    <mat-label>Namn</mat-label>
+                    <input matInput formControlName="namn" required>
+                    <mat-error *ngIf="form.controls['namn'].hasError('required')">Fältet är obligatoriskt</mat-error>
                 </mat-form-field>
             </div>
             <div class="row">
                 <mat-form-field>
                     <mat-label>Kroppsdel</mat-label>
-                    <mat-select formControlName="kroppsdel" multiple required>
+                    <mat-select formControlName="kroppsdel" multiple>
                         <mat-option *ngFor="let kroppsdel of kroppsdelar" [value]="kroppsdel">{{ kroppsdel }}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="form.controls['kroppsdel'].hasError('required')">Fältet är obligatoriskt</mat-error>
                 </mat-form-field>
             </div>
             <div class="row">
@@ -34,7 +28,7 @@
             <div class="row">
                 <mat-form-field>
                     <mat-label>Från</mat-label>
-                    <input matInput formControlName="fran" required type="time" step="600" min="17:00" max="24:00">
+                    <input matInput formControlName="fran" required type="time">
                     <mat-error *ngIf="form.controls['fran'].hasError('required')">Fältet är obligatoriskt</mat-error>
                 </mat-form-field>
                 <mat-form-field>
