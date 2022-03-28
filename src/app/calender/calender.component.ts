@@ -61,7 +61,7 @@ export class CalenderComponent implements OnInit {
       this.calendarOptions.events = res.map(evt => {
         let start = new Date(evt.start.seconds * 1000).toISOString();
         let end = new Date(evt.end.seconds * 1000).toISOString();
-        return {title: evt.name, start: start, end: end};
+        return {start: start, end: end};
       })
     })
   } 

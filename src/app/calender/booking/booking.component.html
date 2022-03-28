@@ -3,13 +3,6 @@
     <mat-dialog-content class="mat-typography">
             <div class="row">
                 <mat-form-field>
-                    <mat-label>Namn</mat-label>
-                    <input matInput formControlName="namn" required>
-                    <mat-error *ngIf="form.controls['namn'].hasError('required')">Fältet är obligatoriskt</mat-error>
-                </mat-form-field>
-            </div>
-            <div class="row">
-                <mat-form-field>
                     <mat-label>Kroppsdel</mat-label>
                     <mat-select formControlName="kroppsdel" multiple>
                         <mat-option *ngFor="let kroppsdel of kroppsdelar" [value]="kroppsdel">{{ kroppsdel }}</mat-option>

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 export interface BookingForm {
   id?: string,
-  name: string,
   start: any,
   end: any,
   kroppsdel?: string[]
@@ -39,7 +38,7 @@ export class BookingService {
 
   updateBooking(booking: BookingForm) {
     const bookingDocRef = doc(this.fireStore, `bookings/${booking.id}`);
-    return updateDoc(bookingDocRef, {name: booking.name, start: booking.start, end: booking.end, kroppsdel: booking?.kroppsdel});
+    return updateDoc(bookingDocRef, {start: booking.start, end: booking.end, kroppsdel: booking?.kroppsdel});
   }
 
 }

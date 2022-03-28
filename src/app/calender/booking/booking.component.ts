@@ -49,7 +49,6 @@ export class BookingComponent implements OnInit {
   initForm() {
     this.form = new FormGroup({
       kroppsdel: new FormControl(""),
-      namn: new FormControl("", [Validators.required]),
       datum: new FormControl(this.currentDay, [Validators.required]),
       fran: new FormControl("17:00", [Validators.required]),
       till: new FormControl({value: "17:20", disabled: true})
@@ -77,9 +76,8 @@ export class BookingComponent implements OnInit {
       end.setHours(endTimeHour);
       end.setMinutes(endTimeMinute);
 
-      let name = this.form.get("namn").value;
       let kroppsdel = this.form.get("kroppsdel").value;
-      this.bookingService.addBooking({name: name, start: start, end: end, kroppsdel: kroppsdel});
+      this.bookingService.addBooking({start: start, end: end, kroppsdel: kroppsdel});
     } else {
       this.form.reset();
     }
