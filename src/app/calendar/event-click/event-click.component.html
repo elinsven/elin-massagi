@@ -1,0 +1,10 @@
+<app-booking-form
+  [headerTitle]="'Bokning: ' + startTime + '-' + endTime"
+  [isEditable]="isEditable"
+  [bodyPartValue]="this.chosenBodyParts"
+  [dateValue]="this.data.start"
+  [startTimeValue]="this.startTime"
+  [endTimeValue]="this.endTime"
+  (onChangeBooking)="onChangeBooking($event)"
+  (onDeleteBooking)="onDeleteBooking()"
+></app-booking-form>

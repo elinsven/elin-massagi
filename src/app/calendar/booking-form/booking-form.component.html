@@ -1,0 +1,77 @@
+<div class="row header">
+  <h2 mat-dialog-title>{{ headerTitle }}</h2>
+  <button align="end" mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<form [formGroup]="bookingForm">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Kroppsdel</mat-label>
+        <mat-select formControlName="bodyPart" multiple>
+          <mat-option *ngFor="let bodyPart of bodyParts" [value]="bodyPart">{{
+            bodyPart
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Datum</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Från</mat-label>
+        <input matInput formControlName="startTime" type="time" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Till</mat-label>
+        <input matInput formControlName="endTime" type="time" />
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button
+      *ngIf="bookingMode"
+      [disabled]="bookingForm.invalid"
+      mat-raised-button
+      [mat-dialog-close]="true"
+      type="submit"
+      (click)="onBook.emit(bookingForm.getRawValue())"
+    >
+      Boka
+    </button>
+    <button
+    *ngIf="isEditable && !bookingMode"
+    mat-button
+    color="warn"
+    [mat-dialog-close]="true"
+    (click)="onDeleteBooking.emit()"
+  >
+    Ta bort
+  </button>
+    <button
+      *ngIf="isEditable && !bookingMode"
+      mat-raised-button
+      (click)="transitionToChange()"
+    >
+      Redigera
+    </button>
+    <button
+      [disabled]="bookingForm.invalid"
+      [mat-dialog-close]="true"
+      *ngIf="!isEditable && !bookingMode"
+      mat-raised-button
+      type="submit"
+      (click)="onChangeBooking.emit(bookingForm.getRawValue())"
+    >
+      Spara
+    </button>
+  </mat-dialog-actions>
+</form>

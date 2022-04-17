@@ -1,46 +1,66 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, doc, collectionData, docData, updateDoc, deleteDoc  } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-export interface BookingForm {
-  id?: string,
-  start: any,
-  end: any,
-  kroppsdel?: string[]
+export interface Booking {
+  bookingid?: string;
+  starttime: string;
+  endtime: string;
+  bodypart: string[];
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookingService {
+  baseUrl: string = environment.baseUrl;
+  apiUrl: string = this.baseUrl + '/bookings/';
 
-  constructor(private fireStore: Firestore) { }
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
 
-  getBookings(): Observable<BookingForm[]> {
-    const bookingRef = collection(this.fireStore, "bookings");
-    return collectionData(bookingRef, {idField: "id"}) as  Observable<BookingForm[]>;
+  constructor(private http: HttpClient) { }
+
+  public getBookings(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(this.apiUrl);
   }
 
-  getBookingById(id): Observable<BookingForm> {
-    const bookingDocRef = doc(this.fireStore, `bookings/${id}`);
-    return docData(bookingDocRef, {idField: "id"}) as  Observable<BookingForm>;
+  public getBookingById(id): Observable<Booking> {
+    const url = `${this.apiUrl}${id}`;
+    return this.http.get<Booking>(url).pipe(
+      map((data) => {
+        return data;
+      })
+    );
   }
 
-  addBooking(booking: BookingForm) {
-    const bookingRef = collection(this.fireStore, "bookings");
-    return addDoc(bookingRef, booking);
+  public addBooking(body): Observable<Booking> {
+    return this.http.post<Booking>(this.apiUrl, body).pipe(
+      tap(() => {
+        this.refresh();
+      })
+    );
   }
 
-  deleteBooking(booking: BookingForm) {
-    const bookingDocRef = doc(this.fireStore, `bookings/${booking.id}`);
-    return deleteDoc(bookingDocRef);
+  public updateBooking(id, body): Observable<Booking> {
+    const url = `${this.apiUrl}${id}`;
+    return this.http.put<Booking>(url, body).pipe(
+      tap(() => {
+        this.refresh();
+      })
+    );
   }
 
-  updateBooking(booking: BookingForm) {
-    const bookingDocRef = doc(this.fireStore, `bookings/${booking.id}`);
-    return updateDoc(bookingDocRef, {start: booking.start, end: booking.end, kroppsdel: booking?.kroppsdel});
+  public deleteBooking(id): void {
+    const url = `${this.apiUrl}${id}`;
+    this.http.delete(url, this.httpOptions).subscribe(() => {
+      this.refresh();
+    });
   }
 
+  private refresh(): void {
+    window.location.reload();
+  }
 }
-
-

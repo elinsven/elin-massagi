@@ -1,11 +1,11 @@
 .calendar {
-    padding: 0 10px;
+  padding: 0 10px;
 }
 
 ::ng-deep .fc .fc-toolbar-title {
-    display: none;
+  display: none;
 }
 
 ::ng-deep .fc-timegrid-event-short .fc-event-time:after {
-    content: none !important;
+  content: none !important;
 }
