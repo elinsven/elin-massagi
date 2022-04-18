@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="left-sidebar">
+    <div class="routes">
+      <button
+        *ngFor="let item of navBarItems"
+        mat-icon-button
+        [routerLink]="[item.route]"
+        [routerLinkActive]="['selected']"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="content wrapper">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="right-sidebar">
+    <div class="wrapper">
+      <h2>Senaste bokningar</h2>
+    </div>
+  </div>
+</div>

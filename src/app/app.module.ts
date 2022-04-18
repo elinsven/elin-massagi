@@ -33,6 +33,7 @@ import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
+import { AppShellComponent } from './app-shell/app-shell.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -47,6 +48,7 @@ FullCalendarModule.registerPlugins([
     BookingComponent,
     EventClickComponent,
     BookingFormComponent,
+    AppShellComponent
   ],
   exports: [CalendarComponent],
   imports: [

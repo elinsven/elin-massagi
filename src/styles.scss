@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
-    margin: 0;
-    font-family: 'Rubik', sans-serif;
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #383838;
 }
 
-body {
-    background-color: rgba(245, 171, 171, 0.1);
+.wrapper {
+  padding: 30px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

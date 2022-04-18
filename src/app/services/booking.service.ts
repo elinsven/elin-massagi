@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export interface Booking {
@@ -14,14 +14,14 @@ export interface Booking {
   providedIn: 'root',
 })
 export class BookingService {
-  baseUrl: string = environment.baseUrl;
-  apiUrl: string = this.baseUrl + '/bookings/';
-
+  private baseUrl: string = environment.baseUrl;
+  private apiUrl: string = this.baseUrl + '/bookings/';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
+  public bookingAction = new Subject<boolean>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getBookings(): Observable<Booking[]> {
     return this.http.get<Booking[]>(this.apiUrl);
@@ -39,7 +39,7 @@ export class BookingService {
   public addBooking(body): Observable<Booking> {
     return this.http.post<Booking>(this.apiUrl, body).pipe(
       tap(() => {
-        this.refresh();
+        this.bookingAction.next(true);
       })
     );
   }
@@ -48,7 +48,7 @@ export class BookingService {
     const url = `${this.apiUrl}${id}`;
     return this.http.put<Booking>(url, body).pipe(
       tap(() => {
-        this.refresh();
+        this.bookingAction.next(true);
       })
     );
   }
@@ -56,11 +56,7 @@ export class BookingService {
   public deleteBooking(id): void {
     const url = `${this.apiUrl}${id}`;
     this.http.delete(url, this.httpOptions).subscribe(() => {
-      this.refresh();
+      this.bookingAction.next(true);
     });
-  }
-
-  private refresh(): void {
-    window.location.reload();
   }
 }

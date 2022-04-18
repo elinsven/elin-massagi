@@ -26,8 +26,7 @@ export class CalendarComponent implements OnInit {
       locale: 'sv',
       timeZone: 'Europe/Stockholm',
       nowIndicator: true,
-      height: 700,
-      contentHeight: 700,
+      height: 'calc(100vh - 60px)',
       allDaySlot: false,
       slotMinTime: '17:00',
       slotLabelFormat: {
@@ -50,6 +49,8 @@ export class CalendarComponent implements OnInit {
         right: 'bookingButton today prev,next',
       },
       events: [],
+      eventBackgroundColor: '#D67A48',
+      eventBorderColor: '#D67A48',
       eventTimeFormat: {
         hour: 'numeric',
         minute: '2-digit',
@@ -60,6 +61,15 @@ export class CalendarComponent implements OnInit {
   }
 
   loadEvents(): void {
+    this.getBookings();
+    this.bookingService.bookingAction.subscribe((action: boolean) => {
+      if (action) {
+        this.getBookings();
+      }
+    });
+  }
+
+  getBookings() {
     this.bookingService.getBookings().subscribe((data) => {
       this.calendarOptions.events = data.map((evt) => {
         return {
