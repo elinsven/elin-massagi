@@ -1,0 +1,57 @@
+:root {
+  --text-primary: #161616;
+  --text-secondary: #525252;
+
+  --background: #ffffff;
+  --background-hover: rgba(141, 141, 141, 0.12);
+  --background-active: rgba(141, 141, 141, 0.5);
+
+  --layer: #f4f4f4;
+  --layer-hover: #e8e8e8;
+  --layer-active: #c6c6c6;
+
+  --border-interactive: #6a5f8a;
+  --border-subtle: #e0e0e0;
+  --border-strong: #8d8d8d;
+}
+
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background-color: var(--background);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.25rem;
+}
+h4 {
+  font-size: 1.125rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  margin: 2rem 1rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
