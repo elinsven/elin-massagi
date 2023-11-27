@@ -1,0 +1,43 @@
+.menubar-navigation {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.0625rem solid var(--border-subtle);
+  height: 3rem;
+  padding: 0 0.5rem;
+  margin: 0;
+}
+
+.menubar-hidden {
+  height: 3rem;
+  width: 3rem;
+}
+
+.menubar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  padding: 0 1rem;
+}
+
+.menubar-title:hover,
+.menubar-add-icon:hover {
+  background-color: var(--background-hover);
+}
+
+.menubar-title:active,
+.menubar-add-icon:active {
+  background-color: var(--background-active);
+}
+
+.menubar-add-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 3rem;
+}
