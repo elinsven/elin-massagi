@@ -30,6 +30,8 @@
   --button-primary: var(--purple-60);
   --button-primary-hover: var(--purple-60-hover);
   --button-primary-active: var(--purple-80);
+
+  --focus: #0f62fe;
 }
 
 .container {
