@@ -42,8 +42,10 @@ form {
 }
 
 label {
+  display: block;
   font-size: 0.875rem;
   color: var(--text-secondary);
+  margin-bottom: 0.5rem;
 }
 
 input,

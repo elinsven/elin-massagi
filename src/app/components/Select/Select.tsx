@@ -26,7 +26,7 @@ const Select = <T extends FieldValues>({
   required,
 }: SelectProps<T>) => {
   return (
-    <div className={styles.input}>
+    <div>
       <label htmlFor={name}>{label}</label>
       <div className={styles.wrapper}>
         <select id={name} {...register(name, { required: required })}>
