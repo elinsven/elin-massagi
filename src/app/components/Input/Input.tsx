@@ -1,35 +1,39 @@
+import {
+  FieldErrors,
+  FieldValues,
+  Path,
+  UseFormRegister,
+} from "react-hook-form";
 import styles from "./Input.module.css";
 
-interface InputProps {
+interface InputProps<T extends FieldValues> {
   label: string;
-  name: string;
+  name: Path<T>;
+  register: UseFormRegister<T>;
+  errors: FieldErrors;
   type?: string;
   placeholder?: string;
-  register: any;
-  errors: any;
+  required?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({
+const Input = <T extends FieldValues>({
   label,
   name,
-  type = "text",
-  placeholder,
   register,
   errors,
-}) => {
-  const ariaInvalidProps = () => ({
-    "aria-invalid": errors.name ? "true" : "false",
-  });
-
+  type = "text",
+  placeholder,
+  required,
+}: InputProps<T>) => {
   return (
     <div className={styles.container}>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name as string}>{label}</label>
       <input
-        id={name}
+        id={name as string}
         type={type}
         placeholder={placeholder}
-        {...ariaInvalidProps()}
-        {...register(name, { required: true })}
+        {...(errors.name ? { "aria-invalid": true } : {})}
+        {...register(name, { required: required })}
       />
       {errors.name && errors.name.type === "required" && (
         <span role="alert">This is required</span>

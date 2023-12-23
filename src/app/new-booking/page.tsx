@@ -74,6 +74,7 @@ const NewBooking: React.FC = () => {
           type="date"
           register={register}
           errors={errors}
+          required
         />
 
         <Input
@@ -82,6 +83,7 @@ const NewBooking: React.FC = () => {
           type="time"
           register={register}
           errors={errors}
+          required
         />
 
         <div>

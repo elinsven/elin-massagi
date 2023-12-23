@@ -1,33 +1,39 @@
-import { ReactNode } from "react";
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 import styles from "./Button.module.css";
 import Link from "next/link";
 
-interface ButtonProps {
+interface CommonButtonProps {
   children: ReactNode;
   type?: "button" | "submit" | "reset" | undefined;
   link?: boolean;
-  url?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
+type ButtonProps = CommonButtonProps & ButtonHTMLAttributes<HTMLButtonElement>;
+
+type LinkProps = CommonButtonProps & AnchorHTMLAttributes<HTMLAnchorElement>;
+
+type Props = ButtonProps | LinkProps;
+
+const Button: React.FC<Props> = ({
   children,
   type,
   link = false,
-  url,
+  ...props
 }) => {
-  return (
-    <>
-      {link ? (
-        <Link href={url as string} className={styles.button}>
-          {children}
-        </Link>
-      ) : (
-        <button className={styles.button} type={type}>
-          {children}
-        </button>
-      )}
-    </>
-  );
+  if (link) {
+    const { href, ...linkProps } = props as LinkProps;
+    return (
+      <Link href={href as string} className={styles.button} {...linkProps}>
+        {children}
+      </Link>
+    );
+  } else {
+    return (
+      <button className={styles.button} type={type} {...(props as ButtonProps)}>
+        {children}
+      </button>
+    );
+  }
 };
 
 export default Button;

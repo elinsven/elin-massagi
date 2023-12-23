@@ -19,7 +19,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
       <h2>{title}</h2>
       <p>{body}</p>
       {buttonText && (
-        <Button link url={url}>
+        <Button link href={url}>
           {buttonText}
         </Button>
       )}
