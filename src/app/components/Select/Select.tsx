@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../styles/components/Input.module.css";
+import styles from "./Select.module.css";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 interface SelectProps {
@@ -20,7 +20,7 @@ const Select: React.FC<SelectProps> = ({
   return (
     <div className={styles.input}>
       <label htmlFor={name}>{label}</label>
-      <div className={styles.selectWrapper}>
+      <div className={styles.wrapper}>
         <select id={name} {...register(name, { required: true })}>
           {options.map(
             (value: { value: string; label: string }, index: number) => (
@@ -31,7 +31,7 @@ const Select: React.FC<SelectProps> = ({
           )}
         </select>
         <FontAwesomeIcon
-          className={styles.selectArrow}
+          className={styles.arrow}
           icon={faChevronDown}
           fontSize={14}
         />

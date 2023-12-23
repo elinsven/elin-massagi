@@ -3,11 +3,9 @@ import { groq } from "next-sanity";
 import { client } from "../../../../sanity/lib/client";
 import { format } from "date-fns";
 
-export default async function Booking({
-  params,
-}: {
+const Booking: React.FC<{
   params: { slug: string };
-}) {
+}> = async ({ params }) => {
   const query = groq`*[_id == "${params.slug}"]  {...,massageService->{...}}`;
   const booking: Booking[] = await client.fetch(query);
 
@@ -20,4 +18,6 @@ export default async function Booking({
       </p>
     </section>
   );
-}
+};
+
+export default Booking;

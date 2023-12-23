@@ -1,4 +1,4 @@
-.home-cards {
+.cards {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;

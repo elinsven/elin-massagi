@@ -1,5 +1,5 @@
-import styles from "../styles/components/EmptyState.module.css";
-import { Button } from "./Button";
+import Button from "../Button/Button";
+import styles from "./EmptyState.module.css";
 
 interface EmptyStateProps {
   title: string;
@@ -8,7 +8,12 @@ interface EmptyStateProps {
   url?: string;
 }
 
-export function EmptyState({ title, body, buttonText, url }: EmptyStateProps) {
+const EmptyState: React.FC<EmptyStateProps> = ({
+  title,
+  body,
+  buttonText,
+  url,
+}) => {
   return (
     <div className={styles.container}>
       <h2>{title}</h2>
@@ -20,4 +25,6 @@ export function EmptyState({ title, body, buttonText, url }: EmptyStateProps) {
       )}
     </div>
   );
-}
+};
+
+export default EmptyState;

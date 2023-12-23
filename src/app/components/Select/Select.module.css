@@ -1,16 +1,10 @@
-.input {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.selectWrapper {
+.wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.selectArrow {
+.arrow {
   position: absolute;
   inset-inline-end: 1rem;
   pointer-events: none;

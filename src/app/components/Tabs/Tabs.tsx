@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "../styles/components/Tabs.module.css";
+import styles from "./Tabs.module.css";
 
 interface Tab {
   id: string;
@@ -13,7 +13,7 @@ interface TabsProps {
   tabs: Tab[];
 }
 
-export default function Tabs({ tabs }: TabsProps) {
+const Tabs: React.FC<TabsProps> = ({ tabs }) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
   const [focusedTabIndex, setFocusedTabIndex] = useState<number | null>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -68,7 +68,7 @@ export default function Tabs({ tabs }: TabsProps) {
             id={`tab-${index}`}
             key={tab.id}
             type="button"
-            className={styles["tab"]}
+            className={styles.tab}
             tabIndex={index === selectedTabIndex ? 0 : -1}
             onClick={() => handleTabClick(index)}
             onFocus={() => handleFocus(index)}
@@ -91,4 +91,6 @@ export default function Tabs({ tabs }: TabsProps) {
       ))}
     </>
   );
-}
+};
+
+export default Tabs;

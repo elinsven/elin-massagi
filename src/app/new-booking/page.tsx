@@ -2,13 +2,13 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { MassageService } from "@/types/MassageService";
-import { EmptyState } from "../components/EmptyState";
+import EmptyState from "../components/EmptyState/EmptyState";
 import { groq } from "next-sanity";
 import { client } from "../../../sanity/lib/client";
-import { Button } from "../components/Button";
-import Input from "../components/Input";
+import Input from "../components/Input/Input";
 import { useRouter } from "next/navigation";
-import Select from "../components/Select";
+import Select from "../components/Select/Select";
+import Button from "../components/Button/Button";
 
 interface BookingFormInputs {
   massageService: string;
@@ -16,7 +16,9 @@ interface BookingFormInputs {
   startTime: string;
 }
 
-function MassageServiceList({ services }: { services: MassageService[] }) {
+const MassageServiceList: React.FC<{ services: MassageService[] }> = ({
+  services,
+}) => {
   return (
     <div role="radiogroup" aria-labelledby="select-service">
       <h2 id="select-service">Select Service</h2>
@@ -32,9 +34,9 @@ function MassageServiceList({ services }: { services: MassageService[] }) {
       )}
     </div>
   );
-}
+};
 
-export default function NewBooking() {
+const NewBooking: React.FC = () => {
   /* const query = groq`*[_type == "massageService"]`;
   const services: MassageService[] = await client.fetch(query); */
 
@@ -88,4 +90,6 @@ export default function NewBooking() {
       </form>
     </section>
   );
-}
+};
+
+export default NewBooking;

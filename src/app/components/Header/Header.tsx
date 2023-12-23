@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "../styles/components/Header.module.css";
+import styles from "./Header.module.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
@@ -10,18 +10,18 @@ interface HeaderProps {
   title: string;
 }
 
-export default function Header({ title }: HeaderProps) {
+const Header: React.FC<HeaderProps> = ({ title }) => {
   const router = useRouter();
   const pathname = usePathname();
 
   return (
     <header>
       <nav aria-label="Home navigation" role="navigation">
-        <ul className={styles["menubar-navigation"]}>
+        <ul className={styles.navigation}>
           <li>
             {pathname !== "/" ? (
               <button
-                className={styles["menubar-add-icon"]}
+                className={styles.icon}
                 type="button"
                 aria-label="Go back to previous page"
                 onClick={() => router.back()}
@@ -30,19 +30,19 @@ export default function Header({ title }: HeaderProps) {
               </button>
             ) : (
               <div
-                className={styles["menubar-hidden"]}
+                className={styles.hidden}
                 aria-hidden="true"
               ></div>
             )}
           </li>
           <li>
-            <Link className={styles["menubar-title"]} href="/">
+            <Link className={styles.title} href="/">
               {title}
             </Link>
           </li>
           <li>
             <Link
-              className={styles["menubar-add-icon"]}
+              className={styles.icon}
               aria-label="New booking"
               href="/new-booking"
             >
@@ -53,4 +53,6 @@ export default function Header({ title }: HeaderProps) {
       </nav>
     </header>
   );
-}
+};
+
+export default Header;

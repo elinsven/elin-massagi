@@ -1,4 +1,4 @@
-import styles from "../styles/components/Input.module.css";
+import styles from "./Input.module.css";
 
 interface InputProps {
   label: string;
@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = ({
   });
 
   return (
-    <div className={styles.input}>
+    <div className={styles.container}>
       <label htmlFor={name}>{label}</label>
       <input
         id={name}

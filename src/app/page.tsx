@@ -1,15 +1,15 @@
 import styles from "./page.module.css";
-import Card from "./components/Card";
-import Tabs from "./components/Tabs";
+import Card from "./components/Card/Card";
+import Tabs from "./components/Tabs/Tabs";
 import { client } from "../../sanity/lib/client";
 import { groq } from "next-sanity";
 import { Booking } from "@/types/Booking";
-import { EmptyState } from "./components/EmptyState";
+import EmptyState from "./components/EmptyState/EmptyState";
 import { format } from "date-fns";
 
-function BookingList({ bookings }: { bookings: Booking[] }) {
+const BookingList: React.FC<{ bookings: Booking[] }> = ({ bookings }) => {
   return (
-    <div className={styles["home-cards"]}>
+    <div className={styles.cards}>
       {bookings.length ? (
         bookings.map((booking: Booking) => (
           <Card
@@ -33,9 +33,9 @@ function BookingList({ bookings }: { bookings: Booking[] }) {
       )}
     </div>
   );
-}
+};
 
-export default async function Home() {
+const Home: React.FC = async () => {
   const query = groq`*[_type == "massageBooking"] {...,massageService->{...}}`;
   const bookings: Booking[] = await client.fetch(query);
 
@@ -72,4 +72,6 @@ export default async function Home() {
       />
     </section>
   );
-}
+};
+
+export default Home;

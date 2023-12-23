@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import styles from "../styles/components/Button.module.css";
+import styles from "./Button.module.css";
 import Link from "next/link";
 
 interface ButtonProps {
@@ -9,7 +9,12 @@ interface ButtonProps {
   url?: string;
 }
 
-export function Button({ children, type, link = false, url }: ButtonProps) {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  type,
+  link = false,
+  url,
+}) => {
   return (
     <>
       {link ? (
@@ -23,4 +28,6 @@ export function Button({ children, type, link = false, url }: ButtonProps) {
       )}
     </>
   );
-}
+};
+
+export default Button;

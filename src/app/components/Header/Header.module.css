@@ -1,4 +1,4 @@
-.menubar-navigation {
+.navigation {
   list-style: none;
   display: flex;
   align-items: center;
@@ -9,12 +9,12 @@
   margin: 0;
 }
 
-.menubar-hidden {
+.hidden {
   height: 3rem;
   width: 3rem;
 }
 
-.menubar-title {
+.title {
   font-size: 1.25rem;
   font-weight: 600;
   display: flex;
@@ -24,17 +24,17 @@
   padding: 0 1rem;
 }
 
-.menubar-title:hover,
-.menubar-add-icon:hover {
+.title:hover,
+.icon:hover {
   background-color: var(--background-hover);
 }
 
-.menubar-title:active,
-.menubar-add-icon:active {
+.title:active,
+.icon:active {
   background-color: var(--background-active);
 }
 
-.menubar-add-icon {
+.icon {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -16,16 +16,15 @@
   text-decoration: underline;
 }
 
-.card-title {
+.title {
   font-size: 1.125rem;
   font-weight: 600;
 }
 
-.card-subtitle {
-  margin-top: 0.5rem;
+.subtitle {
   margin-bottom: 0;
 }
 
-.card-link:hover {
+.link:hover {
   text-decoration: underline;
 }
