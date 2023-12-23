@@ -1,0 +1,43 @@
+:root {
+  --purple-10: #dee7e9;
+  --purple-20: #c4d0d6;
+  --purple-30: #abb5c4;
+  --purple-40: #9197b1;
+  --purple-50: #79789d;
+  --purple-60: #6a5f8a;
+  --purple-60-hover: #66557d;
+  --purple-70: #655379;
+  --purple-80: #5e4669;
+  --purple-90: #553a58;
+  --purple-100: #472e44;
+
+  --text-primary: #161616;
+  --text-secondary: #525252;
+  --text-on-color: #ffffff;
+
+  --background: #ffffff;
+  --background-hover: rgba(141, 141, 141, 0.12);
+  --background-active: rgba(141, 141, 141, 0.5);
+
+  --layer: #f4f4f4;
+  --layer-hover: #e8e8e8;
+  --layer-active: #c6c6c6;
+
+  --border-interactive: var(--purple-60);
+  --border-subtle: #e0e0e0;
+  --border-strong: #8d8d8d;
+
+  --button-primary: var(--purple-60);
+  --button-primary-hover: var(--purple-60-hover);
+  --button-primary-active: var(--purple-80);
+}
+
+.container {
+  margin: 2rem 1rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}

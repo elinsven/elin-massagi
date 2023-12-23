@@ -1,20 +1,3 @@
-:root {
-  --text-primary: #161616;
-  --text-secondary: #525252;
-
-  --background: #ffffff;
-  --background-hover: rgba(141, 141, 141, 0.12);
-  --background-active: rgba(141, 141, 141, 0.5);
-
-  --layer: #f4f4f4;
-  --layer-hover: #e8e8e8;
-  --layer-active: #c6c6c6;
-
-  --border-interactive: #6a5f8a;
-  --border-subtle: #e0e0e0;
-  --border-strong: #8d8d8d;
-}
-
 body {
   margin: 0;
   color: var(--text-primary);
@@ -42,16 +25,57 @@ h4 {
   font-size: 1.125rem;
 }
 
+p {
+  max-width: 37.5rem;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-.container {
-  margin: 2rem 1rem;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2.5rem;
 }
 
-.subtitle {
+label {
   font-size: 0.875rem;
   color: var(--text-secondary);
+}
+
+input,
+select {
+  height: 2.5rem;
+  background-color: var(--layer);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  padding: 0 1rem;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 0.0625rem solid var(--border-strong);
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button {
+  background-color: inherit;
+  font-family: inherit;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
 }

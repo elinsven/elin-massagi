@@ -7,19 +7,20 @@ import { useRouter } from "next/navigation";
 interface CardProps {
   title: string;
   subtitle: string;
+  route: string;
 }
 
-export default function Card({ title, subtitle }: CardProps) {
+export default function Card({ title, subtitle, route }: CardProps) {
   const router = useRouter();
 
   const handleCardClick = () => {
-    router.push("/new-booking");
+    router.push(route);
   };
 
   return (
     <div className={styles["card"]} onClick={handleCardClick}>
       <h2 className={styles["card-title"]}>
-        <Link className={styles["card-link"]} href="/new-booking">
+        <Link className={styles["card-link"]} href={route}>
           {title}
         </Link>
       </h2>

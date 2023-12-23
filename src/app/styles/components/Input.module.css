@@ -1,0 +1,17 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.selectArrow {
+  position: absolute;
+  inset-inline-end: 1rem;
+  pointer-events: none;
+}

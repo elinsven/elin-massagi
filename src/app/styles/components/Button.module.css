@@ -1,0 +1,17 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--button-primary);
+  color: var(--text-on-color);
+  height: 3rem;
+  padding: 0 4rem 0 1rem;
+  font-size: 0.875rem;
+}
+
+.button:hover {
+  background-color: var(--button-primary-hover);
+}
+
+.button:active {
+  background-color: var(--button-primary-active);
+}
