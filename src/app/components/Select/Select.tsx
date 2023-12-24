@@ -25,11 +25,18 @@ const Select = <T extends FieldValues>({
   errors,
   required,
 }: SelectProps<T>) => {
+  const error = errors[name];
+
   return (
     <div>
       <label htmlFor={name}>{label}</label>
       <div className={styles.wrapper}>
-        <select id={name} {...register(name, { required: required })}>
+        <select
+          id={name}
+          aria-describedby={`${name}-error-message`}
+          {...(errors[name] ? { "aria-invalid": true } : {})}
+          {...register(name, { required: required })}
+        >
           {options.map(
             (value: { value: string; label: string }, index: number) => (
               <option key={index} value={value.value}>
@@ -45,8 +52,14 @@ const Select = <T extends FieldValues>({
         />
       </div>
 
-      {errors.name && errors.name.type === "required" && (
-        <span role="alert">This is required</span>
+      {error && error.type === "required" && (
+        <div
+          role="alert"
+          id={`${name}-error-message`}
+          className="form-error-message"
+        >
+          This field is required
+        </div>
       )}
     </div>
   );

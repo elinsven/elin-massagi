@@ -78,6 +78,13 @@ input:focus {
   border-radius: 0;
 }
 
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+  outline: 0.125rem solid var(--error);
+  outline-offset: -0.125rem;
+  border-radius: 0;
+}
+
 button {
   background-color: inherit;
   font-family: inherit;

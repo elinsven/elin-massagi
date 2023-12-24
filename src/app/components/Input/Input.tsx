@@ -25,18 +25,28 @@ const Input = <T extends FieldValues>({
   placeholder,
   required,
 }: InputProps<T>) => {
+  const error = errors[name];
+
   return (
     <div className={styles.container}>
-      <label htmlFor={name as string}>{label}</label>
+      <label htmlFor={name}>{label}</label>
       <input
-        id={name as string}
+        id={name}
+        aria-describedby={`${name}-error-message`}
         type={type}
         placeholder={placeholder}
-        {...(errors.name ? { "aria-invalid": true } : {})}
+        {...(errors[name] ? { "aria-invalid": true } : {})}
         {...register(name, { required: required })}
       />
-      {errors.name && errors.name.type === "required" && (
-        <span role="alert">This is required</span>
+
+      {error && error.type === "required" && (
+        <div
+          role="alert"
+          id={`${name}-error-message`}
+          className="form-error-message"
+        >
+          This field is required
+        </div>
       )}
     </div>
   );
