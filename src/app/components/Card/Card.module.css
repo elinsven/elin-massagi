@@ -12,7 +12,7 @@
   background-color: var(--layer-active);
 }
 
-.card:hover .card-link {
+.card:hover .link {
   text-decoration: underline;
 }
 
