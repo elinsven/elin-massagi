@@ -1,11 +1,10 @@
 import styles from "./page.module.css";
-import Card from "./components/Card/Card";
-import Tabs from "./components/Tabs/Tabs";
-import { client } from "../../sanity/lib/client";
-import { groq } from "next-sanity";
+import Card from "../components/Card/Card";
+import Tabs from "../components/Tabs/Tabs";
 import { Booking } from "@/types/Booking";
-import EmptyState from "./components/EmptyState/EmptyState";
+import EmptyState from "../components/EmptyState/EmptyState";
 import { format } from "date-fns";
+import { getBookings } from "@/utils/bookings";
 
 const BookingList: React.FC<{ bookings: Booking[] }> = ({ bookings }) => {
   return (
@@ -13,14 +12,14 @@ const BookingList: React.FC<{ bookings: Booking[] }> = ({ bookings }) => {
       {bookings.length ? (
         bookings.map((booking: Booking) => (
           <Card
-            key={booking._id}
+            key={booking.id}
             title={booking.massageService?.name}
             subtitle={
               format(new Date(booking.bookingDate), "E dd LLLL Y") +
               ", " +
               booking.startTime
             }
-            route={`/booking/${booking._id}`}
+            route={`/booking/${booking.id}`}
           />
         ))
       ) : (
@@ -35,9 +34,8 @@ const BookingList: React.FC<{ bookings: Booking[] }> = ({ bookings }) => {
   );
 };
 
-const Page: React.FC = async () => {
-  const query = groq`*[_type == "massageBooking"] {...,massageService->{...}}`;
-  const bookings: Booking[] = await client.fetch(query);
+const Page: React.FC = () => {
+  const bookings: Booking[] = getBookings;
 
   const upcomingBookings: Booking[] = [];
   const completedBookings: Booking[] = [];

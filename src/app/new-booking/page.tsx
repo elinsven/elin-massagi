@@ -1,10 +1,10 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import Input from "../components/Input/Input";
+import Input from "../../components/Input/Input";
 import { useRouter } from "next/navigation";
-import Select from "../components/Select/Select";
-import Button from "../components/Button/Button";
+import Select from "../../components/Select/Select";
+import Button from "../../components/Button/Button";
 
 interface BookingFormInputs {
   massageService: string;

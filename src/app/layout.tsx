@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { config } from "@fortawesome/fontawesome-svg-core";
-import "./styles/globals.css";
-import "./styles/theme.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import Header from "./components/Header/Header";
+import "../styles/globals.css";
+import "../styles/theme.css";
+import Header from "../components/Header/Header";
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });

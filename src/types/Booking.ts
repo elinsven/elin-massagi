@@ -1,7 +1,7 @@
-import { SanityBase } from "./SanityBase";
 import { MassageService } from "./MassageService";
 
-export interface Booking extends SanityBase {
+export interface Booking {
+  id: string;
   bookingDate: Date;
   startTime: string;
   massageService: MassageService;
