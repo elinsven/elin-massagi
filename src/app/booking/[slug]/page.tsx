@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 import { client } from "../../../../sanity/lib/client";
 import { format } from "date-fns";
 
-const Booking: React.FC<{
+const Page: React.FC<{
   params: { slug: string };
 }> = async ({ params }) => {
   const query = groq`*[_id == "${params.slug}"]  {...,massageService->{...}}`;
@@ -20,4 +20,4 @@ const Booking: React.FC<{
   );
 };
 
-export default Booking;
+export default Page;

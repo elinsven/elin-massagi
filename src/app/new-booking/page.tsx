@@ -1,10 +1,6 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { MassageService } from "@/types/MassageService";
-import EmptyState from "../components/EmptyState/EmptyState";
-import { groq } from "next-sanity";
-import { client } from "../../../sanity/lib/client";
 import Input from "../components/Input/Input";
 import { useRouter } from "next/navigation";
 import Select from "../components/Select/Select";
@@ -16,36 +12,14 @@ interface BookingFormInputs {
   startTime: string;
 }
 
-const MassageServiceList: React.FC<{ services: MassageService[] }> = ({
-  services,
-}) => {
-  return (
-    <div role="radiogroup" aria-labelledby="select-service">
-      <h2 id="select-service">Select Service</h2>
-      {services.length ? (
-        services.map((service: MassageService) => (
-          <label key={service._id}>
-            <input type="radio" name="services" value={service.name} />
-            {service.name}
-          </label>
-        ))
-      ) : (
-        <EmptyState title="" body="" />
-      )}
-    </div>
-  );
-};
-
-const NewBooking: React.FC = () => {
-  /* const query = groq`*[_type == "massageService"]`;
-  const services: MassageService[] = await client.fetch(query); */
+const Page: React.FC = () => {
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<BookingFormInputs>();
-  const router = useRouter();
   const onSubmit: SubmitHandler<BookingFormInputs> = (data) => {
     router.push("/");
     console.log(data);
@@ -94,4 +68,4 @@ const NewBooking: React.FC = () => {
   );
 };
 
-export default NewBooking;
+export default Page;

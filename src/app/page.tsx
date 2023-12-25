@@ -35,7 +35,7 @@ const BookingList: React.FC<{ bookings: Booking[] }> = ({ bookings }) => {
   );
 };
 
-const Home: React.FC = async () => {
+const Page: React.FC = async () => {
   const query = groq`*[_type == "massageBooking"] {...,massageService->{...}}`;
   const bookings: Booking[] = await client.fetch(query);
 
@@ -74,4 +74,4 @@ const Home: React.FC = async () => {
   );
 };
 
-export default Home;
+export default Page;
