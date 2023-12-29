@@ -1,24 +1,39 @@
+"use client";
+
+import { getBookingById } from "@/app/services/booking";
 import EmptyState from "@/components/EmptyState/EmptyState";
 import { Booking } from "@/types/Booking";
-import { getBookings } from "@/utils/bookings";
 import { format } from "date-fns";
+import { useEffect, useState } from "react";
 
 const Page: React.FC<{ params: { slug: string } }> = ({ params }) => {
-  const booking = getBookings.find((booking: Booking) => {
-    return booking.id === params.slug;
+  const [data, setData] = useState<{ booking: Booking | null }>({
+    booking: null,
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setData(await getBookingById(params.slug));
+      } catch (error) {
+        console.error("Error fetching booking:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <section>
-      {booking ? (
+      {data.booking ? (
         <>
-          <h1>{booking?.massageService.name}</h1>
+          <h1>{data.booking?.booking.massage_service.name}</h1>
           <p className="subtitle">
             {` Date: ${format(
-              new Date(booking?.bookingDate as Date),
+              new Date(data.booking?.booking.booking_date),
               "E dd LLLL Y"
             )},
-          ${booking?.startTime}`}
+          ${data.booking?.booking.start_time}`}
           </p>
         </>
       ) : (

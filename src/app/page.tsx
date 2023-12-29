@@ -1,10 +1,13 @@
+"use client";
+
 import styles from "./page.module.css";
 import Card from "../components/Card/Card";
 import Tabs from "../components/Tabs/Tabs";
-import { Booking } from "@/types/Booking";
 import EmptyState from "../components/EmptyState/EmptyState";
 import { format } from "date-fns";
-import { getBookings } from "@/utils/bookings";
+import { useEffect, useState } from "react";
+import { getBookings } from "./services/booking";
+import { Booking } from "@/types/Booking";
 
 const BookingList: React.FC<{ bookings: Booking[] }> = ({ bookings }) => {
   return (
@@ -12,14 +15,14 @@ const BookingList: React.FC<{ bookings: Booking[] }> = ({ bookings }) => {
       {bookings.length ? (
         bookings.map((booking: Booking) => (
           <Card
-            key={booking.id}
-            title={booking.massageService?.name}
+            key={booking.booking.booking_id}
+            title={booking.booking.massage_service.name}
             subtitle={
-              format(new Date(booking.bookingDate), "E dd LLLL Y") +
+              format(new Date(booking.booking.booking_date), "E dd LLLL Y") +
               ", " +
-              booking.startTime
+              booking.booking.start_time
             }
-            route={`/booking/${booking.id}`}
+            route={`/booking/${booking.booking.booking_id}`}
           />
         ))
       ) : (
@@ -35,13 +38,27 @@ const BookingList: React.FC<{ bookings: Booking[] }> = ({ bookings }) => {
 };
 
 const Page: React.FC = () => {
-  const bookings: Booking[] = getBookings;
+  const [data, setData] = useState<{ bookings: Booking[] }>({
+    bookings: [],
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setData(await getBookings());
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const upcomingBookings: Booking[] = [];
   const completedBookings: Booking[] = [];
 
-  for (const booking of bookings) {
-    if (booking.bookingDate > new Date()) {
+  for (const booking of data?.bookings) {
+    if (new Date(booking.booking.booking_date) > new Date()) {
       upcomingBookings.push(booking);
     } else {
       completedBookings.push(booking);

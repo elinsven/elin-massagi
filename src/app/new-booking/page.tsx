@@ -1,28 +1,60 @@
 "use client";
 
+import { Booking } from "@/schemas/booking";
+import { MassageService } from "@/schemas/massageService";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Input from "../../components/Input/Input";
 import { useRouter } from "next/navigation";
 import Select from "../../components/Select/Select";
 import Button from "../../components/Button/Button";
-
-interface BookingFormInputs {
-  massageService: string;
-  bookingDate: Date;
-  startTime: string;
-}
+import { useEffect, useState } from "react";
+import { getMassageServices } from "../services/massageService";
+import { format } from "date-fns";
+import { createBooking } from "../services/booking";
 
 const Page: React.FC = () => {
   const router = useRouter();
+
+  const [data, setData] = useState<{ massageServices: MassageService[] }>({
+    massageServices: [],
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setData(await getMassageServices());
+      } catch (error) {
+        console.error("Error fetching massage services:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BookingFormInputs>();
-  const onSubmit: SubmitHandler<BookingFormInputs> = (data) => {
-    router.push("/");
-    console.log(data);
+  } = useForm<Booking>({
+    defaultValues: {
+      booking_date: format(new Date(), "yyyy-MM-dd"),
+      massage_service_id: 0,
+    },
+  });
+  const onSubmit: SubmitHandler<Booking> = (data) => {
+    const create = async () => {
+      try {
+        await createBooking(data);
+        router.push("/");
+      } catch (error) {
+        console.error("Error creating booking:", error);
+      }
+    };
+
+    create();
+    /*   fetch("/api/bookings", { method: "POST", body: JSON.stringify(data) })
+      .then((response) => response.json())
+      .catch((error) => console.error("Error:", error)); */
   };
 
   return (
@@ -36,15 +68,20 @@ const Page: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Select
           label="Massage service"
-          name="massageService"
-          options={[{ value: "1", label: "Foot Massage" }]}
+          name="massage_service_id"
+          options={data.massageServices.map((massageService) => {
+            return {
+              value: massageService.massage_service_id as number,
+              label: massageService.name,
+            };
+          })}
           register={register}
           errors={errors}
         />
 
         <Input
           label="Booking date"
-          name="bookingDate"
+          name="booking_date"
           type="date"
           register={register}
           errors={errors}
@@ -53,7 +90,7 @@ const Page: React.FC = () => {
 
         <Input
           label="Start time"
-          name="startTime"
+          name="start_time"
           type="time"
           register={register}
           errors={errors}

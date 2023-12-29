@@ -11,7 +11,7 @@ import {
 interface SelectProps<T extends FieldValues> {
   label: string;
   name: Path<T>;
-  options: { value: string; label: string }[];
+  options: { value: number; label: string }[];
   register: UseFormRegister<T>;
   errors: FieldErrors;
   required?: boolean;
@@ -35,10 +35,17 @@ const Select = <T extends FieldValues>({
           id={name}
           aria-describedby={`${name}-error-message`}
           {...(errors[name] ? { "aria-invalid": true } : {})}
-          {...register(name, { required: required })}
+          {...register(name, {
+            required: required,
+            valueAsNumber: true,
+            min: 1,
+          })}
         >
+          <option value={0} disabled>
+            Choose a {label.toLowerCase()}
+          </option>
           {options.map(
-            (value: { value: string; label: string }, index: number) => (
+            (value: { value: number; label: string }, index: number) => (
               <option key={index} value={value.value}>
                 {value.label}
               </option>
@@ -52,15 +59,17 @@ const Select = <T extends FieldValues>({
         />
       </div>
 
-      {error && error.type === "required" && (
-        <div
-          role="alert"
-          id={`${name}-error-message`}
-          className="form-error-message"
-        >
-          This field is required
-        </div>
-      )}
+      {error &&
+        (error.type === "required" ||
+          (error.type === "min" && (
+            <div
+              role="alert"
+              id={`${name}-error-message`}
+              className="form-error-message"
+            >
+              This field is required
+            </div>
+          )))}
     </div>
   );
 };
