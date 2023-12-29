@@ -58,9 +58,8 @@ label {
 
 input,
 select {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
+  display: block;
+  text-align: left;
 
   -webkit-appearance: none;
   -moz-appearance: none;
