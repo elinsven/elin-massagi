@@ -58,9 +58,6 @@ label {
 
 input,
 select {
-  display: block;
-  text-align: left;
-
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -83,6 +80,10 @@ select {
 
 select {
   cursor: pointer;
+}
+
+input::-webkit-date-and-time-value {
+  text-align: left;
 }
 
 select:active,
