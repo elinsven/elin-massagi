@@ -61,9 +61,13 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+
   height: 2.5rem;
   width: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
+
   background-color: var(--layer);
   color: var(--text-primary);
   font-size: 0.875rem;
