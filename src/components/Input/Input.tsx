@@ -28,7 +28,7 @@ const Input = <T extends FieldValues>({
   const error = errors[name];
 
   return (
-    <div className={styles.container}>
+    <div>
       <label htmlFor={name}>{label}</label>
       <input
         id={name}

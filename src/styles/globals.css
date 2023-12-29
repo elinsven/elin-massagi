@@ -59,6 +59,8 @@ label {
 input,
 select {
   height: 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
   background-color: var(--layer);
   color: var(--text-primary);
   font-size: 0.875rem;
@@ -74,7 +76,6 @@ select {
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
-  width: 100%;
 }
 
 select:active,
