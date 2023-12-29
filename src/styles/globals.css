@@ -1,7 +1,14 @@
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 body {
   margin: 0;
   color: var(--text-primary);
   background-color: var(--background);
+  max-width: 40rem;
 }
 
 h1,

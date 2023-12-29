@@ -52,9 +52,6 @@ const Page: React.FC = () => {
     };
 
     create();
-    /*   fetch("/api/bookings", { method: "POST", body: JSON.stringify(data) })
-      .then((response) => response.json())
-      .catch((error) => console.error("Error:", error)); */
   };
 
   return (
