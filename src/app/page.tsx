@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import Card from "../components/Card/Card";
 import Tabs from "../components/Tabs/Tabs";
 import EmptyState from "../components/EmptyState/EmptyState";
-import { format } from "date-fns";
+import { format, isAfter } from "date-fns";
 import { useEffect, useState } from "react";
 import { getBookings } from "./services/booking";
 import { Booking } from "@/types/Booking";
@@ -58,7 +58,12 @@ const Page: React.FC = () => {
   const completedBookings: Booking[] = [];
 
   for (const booking of data?.bookings) {
-    if (new Date(booking.booking.booking_date) > new Date()) {
+    const bookingDate: Date = new Date(booking.booking.booking_date);
+    const [hours, minutes] = booking.booking.start_time.split(":");
+    bookingDate.setHours(parseInt(hours));
+    bookingDate.setMinutes(parseInt(minutes));
+
+    if (isAfter(bookingDate, new Date())) {
       upcomingBookings.push(booking);
     } else {
       completedBookings.push(booking);
