@@ -1,0 +1,12 @@
+.loading {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: var(--overlay);
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

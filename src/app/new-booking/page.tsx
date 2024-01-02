@@ -11,10 +11,13 @@ import { useEffect, useState } from "react";
 import { getMassageServices } from "../services/massageService";
 import { format } from "date-fns";
 import { createBooking } from "../services/booking";
+import Loading from "@/components/Loading/Loading";
+import styles from "./page.module.css";
 
 const Page: React.FC = () => {
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<{ massageServices: MassageService[] }>({
     massageServices: [],
   });
@@ -42,9 +45,11 @@ const Page: React.FC = () => {
     },
   });
   const onSubmit: SubmitHandler<Booking> = (data) => {
+    setIsLoading(true);
     const create = async () => {
       try {
         await createBooking(data);
+        setIsLoading(false);
         router.push("/");
       } catch (error) {
         console.error("Error creating booking:", error);
@@ -56,6 +61,12 @@ const Page: React.FC = () => {
 
   return (
     <section>
+      {isLoading && (
+        <div className={styles.loading}>
+          <Loading />
+        </div>
+      )}
+
       <h1>New booking</h1>
       <p className="subtitle">
         Indulge in ultimate relaxation and choose from our exquisite range of

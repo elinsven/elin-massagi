@@ -34,6 +34,8 @@
   --error: #da1e28;
 
   --focus: #0f62fe;
+
+  --overlay: rgba(22, 22, 22, 0.5);
 }
 
 .container {
