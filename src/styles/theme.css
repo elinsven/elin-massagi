@@ -36,6 +36,8 @@
   --focus: #0f62fe;
 
   --overlay: rgba(22, 22, 22, 0.5);
+  --skeleton-element: #c6c6c6;
+  --skeleton-background: #e5e5e5;
 }
 
 .container {

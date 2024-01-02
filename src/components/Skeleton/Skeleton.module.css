@@ -1,0 +1,47 @@
+.skeleton {
+  position: relative;
+  block-size: var(--container-height, 4rem);
+  inline-size: var(--container-width, 4rem);
+  background: var(--skeleton-background);
+}
+
+.skeleton::before {
+  position: absolute;
+  background: var(--skeleton-element);
+  block-size: 100%;
+  inline-size: 100%;
+  content: "";
+  animation: skeleton 3s ease-in-out infinite;
+}
+
+@keyframes skeleton {
+  0%,
+  100% {
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+  }
+
+  25%,
+  76% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+  }
+  26%,
+  75% {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+  }
+
+  50% {
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+  }
+}
